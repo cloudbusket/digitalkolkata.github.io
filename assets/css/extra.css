@@ -1,0 +1,78 @@
+/* Extra styles for the static version: motion, mobile menu, forms. */
+html{scroll-behavior:smooth}
+.min-h-screen.flex-col>main{flex:1}
+
+/* scroll reveal (only when JS is on, so the page is fully visible without it) */
+.js .reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease;transition-delay:var(--d,0s)}
+.js .reveal.in{opacity:1;transform:none}
+
+/* one orchestrated load-in for the hero */
+@keyframes dk-up{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+.js .hero-in{animation:dk-up .8s ease both}
+.js .hero-in:nth-child(2){animation-delay:.08s}.js .hero-in:nth-child(3){animation-delay:.16s}
+.js .hero-in:nth-child(4){animation-delay:.24s}.js .hero-in:nth-child(5){animation-delay:.32s}
+
+/* slow floating shapes in the hero */
+@keyframes dk-float{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(10px) rotate(-1.5deg)}}
+.float-1{animation:dk-float 9s ease-in-out infinite}
+.float-2{animation:dk-float 11s ease-in-out infinite reverse}
+.float-3{animation:dk-float 8s ease-in-out infinite .6s}
+
+/* header gets a hairline once the page scrolls */
+#site-header.scrolled{border-bottom:1px solid hsl(var(--border-subtle)/.4);box-shadow:0 8px 30px hsl(0 0% 0%/.25)}
+
+/* mobile menu */
+#menu-btn .ico-close{display:none}
+#menu-btn[aria-expanded="true"] .ico-open{display:none}
+#menu-btn[aria-expanded="true"] .ico-close{display:inline}
+.mobile-menu{display:none;flex-direction:column;gap:4px;padding:12px 24px 20px;border-top:1px solid hsl(var(--border-subtle)/.4);background:hsl(var(--background)/.97)}
+.mobile-menu.open{display:flex}
+.mobile-menu a{padding:12px 4px;font-weight:500;color:hsl(var(--foreground));font-size:16px}
+.mobile-menu a.active{color:hsl(var(--primary))}
+.mobile-menu a.cta{margin-top:8px;text-align:center;border-radius:6px;background:hsl(var(--primary));color:hsl(var(--primary-foreground));font-weight:600}
+@media(min-width:768px){.mobile-menu,.mobile-menu.open{display:none}}
+
+/* services page list */
+.svc-list{list-style:none;margin:0 0 20px;padding:0;display:grid;gap:8px}
+.svc-list li{position:relative;padding-left:22px;font-size:14px;color:hsl(var(--foreground))}
+.svc-list li::before{content:"";position:absolute;left:2px;top:.55em;width:8px;height:8px;border-radius:2px;background:hsl(var(--accent))}
+
+/* contact page */
+.contact-grid{display:grid;grid-template-columns:1fr;gap:32px}
+@media(min-width:1024px){.contact-grid{grid-template-columns:5fr 7fr;gap:48px}}
+.contact-info{display:grid;gap:16px;align-content:start}
+.wa-btn{display:inline-flex;align-items:center;justify-content:center;padding:14px 24px;border-radius:6px;font-weight:600;border:1px solid hsl(var(--border));color:hsl(var(--foreground))}
+.wa-btn:hover{border-color:hsl(var(--primary));color:hsl(var(--primary))}
+.contact-form{padding:32px;border-radius:8px;display:grid;gap:18px}
+.field{display:grid;gap:6px}
+.field-row{display:grid;gap:18px}
+@media(min-width:640px){.field-row{grid-template-columns:1fr 1fr}}
+.field label{font-size:13px;font-weight:600;color:hsl(var(--muted-foreground))}
+.field input,.field select,.field textarea{width:100%;padding:12px 14px;border-radius:6px;font:inherit;color:hsl(var(--foreground));background:hsl(var(--background));border:1px solid hsl(var(--border))}
+.field input:focus,.field select:focus,.field textarea:focus{outline:2px solid hsl(var(--primary)/.6);outline-offset:1px;border-color:hsl(var(--primary))}
+.field .invalid{border-color:hsl(var(--destructive))}
+.hp{position:absolute!important;left:-9999px;width:1px;height:1px;opacity:0}
+.submit-btn{padding:14px 28px;border:0;border-radius:6px;font:inherit;font-weight:600;cursor:pointer;transition:transform .2s}
+.submit-btn:hover{transform:scale(1.03)}
+.submit-btn[disabled]{opacity:.6;cursor:default;transform:none}
+.form-note{min-height:1.4em;font-size:14px;color:hsl(var(--muted-foreground))}
+.form-note.ok{color:hsl(var(--success))}.form-note.err{color:hsl(var(--destructive))}
+
+/* toast */
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#1a1a1a;color:#fff;padding:10px 16px;border-radius:8px;font-size:14px;z-index:100;transition:all .25s}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+a:focus-visible,button:focus-visible{outline:2px solid hsl(var(--primary));outline-offset:3px;border-radius:4px}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .js .reveal,.js .hero-in{opacity:1;transform:none;animation:none;transition:none}
+  .float-1,.float-2,.float-3{animation:none}
+}
+
+/* a little air between the hero buttons and the share row */
+[aria-label="Share this page"]{margin-top:1.75rem}
+
+/* utilities used by the Services/Contact pages that the original compiled CSS did not include */
+.w-12{width:3rem}
+.bottom-16{bottom:4rem}
+@media(max-width:639px){.float-2{display:none}}
